@@ -1,7 +1,7 @@
 from fastapi import FastAPI, HTTPException
 from fastapi.middleware.cors import CORSMiddleware
 from fastapi.staticfiles import StaticFiles
-from fastapi.responses import FileResponse
+from fastapi.responses import FileResponse, RedirectResponse
 from pydantic import BaseModel
 from typing import List, Dict, Any, Optional
 import pandas as pd
@@ -192,7 +192,12 @@ async def startup_event():
     """Initialize the recommendation system on startup"""
     load_and_preprocess_data()
 
-@app.get("/", response_model=HealthCheck)
+@app.get("/")
+async def root_redirect():
+    """Redirect root to web interface"""
+    return RedirectResponse(url="/web", status_code=302)
+
+@app.get("/status", response_model=HealthCheck)
 async def health_check():
     """Health check endpoint"""
     return {

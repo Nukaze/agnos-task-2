@@ -10,15 +10,15 @@ import sys
 import os
 from pathlib import Path
 import subprocess
+import fastapi
+import pandas
+import numpy
+import sklearn
+import joblib
 
 def check_dependencies():
     """Check if all required dependencies are available"""
     try:
-        import fastapi
-        import pandas
-        import numpy
-        import sklearn
-        import joblib
         print("✓ All dependencies are available")
         return True
     except ImportError as e:

@@ -13,6 +13,7 @@ from sklearn.metrics.pairwise import cosine_similarity
 from sklearn.preprocessing import StandardScaler
 import joblib
 import os
+import setuptools.dist
 
 app = FastAPI(
     title="Symptom Recommendation System API",

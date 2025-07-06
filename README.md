@@ -13,13 +13,20 @@ A comprehensive medical symptom recommendation system built with FastAPI and mac
 
 ## Technology Stack
 
-- **Backend**: FastAPI (Python)
+- **Backend**: FastAPI (Python 3.9)
 - **Machine Learning**: scikit-learn, pandas, numpy
 - **Data Processing**: TF-IDF vectorization, cosine similarity
 - **Model Persistence**: joblib
 - **API Documentation**: Automatic OpenAPI/Swagger docs
+- **Deployment**: Docker, Railway (Python 3.9 compatible)
 
 ## Installation
+
+### Prerequisites
+- **Python 3.9+** (required to avoid distutils issues in Python 3.12+)
+- **Docker** (optional, for containerized deployment)
+
+### Setup
 
 1. **Clone the repository**:
 ```bash
@@ -27,7 +34,13 @@ git clone <repository-url>
 cd agnos-task-2
 ```
 
-2. **Install dependencies**:
+2. **Check Python version**:
+```bash
+python --version  # Should be 3.9+
+python test_python_version.py  # Run compatibility test
+```
+
+3. **Install dependencies**:
 ```bash
 pip install -r requirements.txt
 ```
@@ -196,6 +209,70 @@ The API includes comprehensive error handling:
 - Graceful handling of malformed data
 - Detailed error messages for debugging
 - HTTP status codes for different error types
+
+## 🚀 Deployment
+
+This project can be deployed to various cloud platforms using GitHub Actions. See [DEPLOYMENT.md](DEPLOYMENT.md) for detailed instructions.
+
+### Quick Deploy Options:
+
+1. **Railway** (Recommended - Free):
+   ```bash
+   # Connect your GitHub repo to Railway
+   # Push to main branch for automatic deployment
+   git push origin main
+   ```
+
+2. **Render** (Free):
+   ```bash
+   # Connect your GitHub repo to Render
+   # Configure build command: pip install -r requirements.txt
+   # Configure start command: uvicorn app:app --host 0.0.0.0 --port $PORT
+   ```
+
+3. **Heroku** (Paid):
+   ```bash
+   heroku create your-app-name
+   git push heroku main
+   ```
+
+### GitHub Actions
+
+The project includes a GitHub Actions workflow (`.github/workflows/deploy.yml`) that:
+- Runs tests on every push
+- Deploys to Railway and Render on main branch
+- Provides automatic CI/CD pipeline
+
+### Docker Deployment
+
+#### Quick Docker Deploy:
+```bash
+# Build and run with Docker
+docker build -t symptom-recommendation-api .
+docker run -p 8000:8000 symptom-recommendation-api
+```
+
+#### Docker Compose (Recommended for local testing):
+```bash
+# Start with docker-compose
+docker-compose up --build
+
+# Run in background
+docker-compose up -d --build
+```
+
+#### Railway Docker Deploy:
+```bash
+# Use the Railway Docker deployment script
+python deploy_railway.py
+```
+
+#### Manual Railway Docker Deploy:
+1. Go to [railway.app](https://railway.app)
+2. Create new project
+3. Choose "Deploy from GitHub repo"
+4. Railway will automatically detect Dockerfile
+5. Deploy!
 
 ## Contributing
 

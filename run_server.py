@@ -70,7 +70,7 @@ def main():
             "app:app",
             host=host,
             port=port,
-            reload=True,  # Set to True for development
+            reload=False,  # Set to True for development
             log_level="info"
         )
     except KeyboardInterrupt:

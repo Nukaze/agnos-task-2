@@ -9,6 +9,7 @@ from sklearn.decomposition import PCA
 import joblib
 import json
 from typing import List, Dict, Any, Tuple
+import setuptools.dist
 
 class SymptomClassifier:
     """Advanced symptom classification model"""
